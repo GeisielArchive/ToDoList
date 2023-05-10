@@ -67,7 +67,7 @@ app.get('/about', function(req, res) {
 //                               Page posts                                  //
 ///////////////////////////////////////////////////////////////////////////////
 
-// Create a new item in the list.
+// Add a new item in the list.
 app.post('/', function(req, res) {
     // Get the item from the form.
     let item = req.body.newItem;
@@ -85,6 +85,31 @@ app.post('/', function(req, res) {
             .then(() => {res.redirect('/')})
             .catch((err) => {console.log(err)});
     }
+});
+
+
+// Delete an item from the list.
+app.post('/delete', function(req, res) {
+  let item = req.body.checkBox;
+
+  if (item === undefined) {
+    return;
+
+  } else {
+    let [id, list] = item.split("|");
+
+    if (list === "Work List") {
+        const itemPromise = crud.deleteOneItem(id, 'WorkTask');
+        itemPromise
+            .then(() => {res.redirect('/work')})
+            .catch((err) => {console.log(err)});
+    }else {
+        const itemPromise = crud.deleteOneItem(id, 'DailyTask');
+        itemPromise
+            .then(() => {res.redirect('/')})
+            .catch((err) => {console.log(err)});
+    }
+  }
 });
 
 

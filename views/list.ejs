@@ -5,13 +5,21 @@
         </h1>
     </div>
 
+    <div  class="box">
+        <div class="menu">
+            <a href="/">Home</a>
+            <a href="/work">Work</a>
+        </div>
+    </div>
+
     <div class="box">
             <% for (var i = 0; i <newListemItem.length; i++) { %>
+            <form action="/delete" method="post">
             <div class="item">
-                <input type="checkbox">
-                <p><%= newListemItem[i] %></p>
+                <input type="checkbox" name="checkBox" value="<%= newListemItem[i].id %>|<%= listTitle  %>" onchange="this.form.submit()">
+                <p><%= newListemItem[i].name %></p>
             </div>
-                
+            </form>    
             <% } %>
 
         <form class="item" action="/" method="post">

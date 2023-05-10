@@ -1,5 +1,4 @@
 // Get current date.
-
 exports.getDate = getDate;
 exports.getDay = getDay;
 
